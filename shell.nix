@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { config = { allowUnfree = true; }; } }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
   pythonEnv = pkgs.python313.withPackages (ps: with ps; [
@@ -48,8 +48,8 @@ pkgs.mkShell {
     pkgs.hdf5
     pkgs.freetype
 
-    # Dependency for Jupyter Notebook proxying
-    pkgs.nodePackages.configurable-http-proxy
+    # Dependency for Jupyter Notebook proxying (removed as it is unnecessary for a minimal local shell)
+    # pkgs.nodePackages.configurable-http-proxy
   ];
 
   shellHook = ''
