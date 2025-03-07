@@ -6,6 +6,13 @@ import torch
 def main(args: argparse.Namespace) -> None:
     # Test PyTorch installation
     print("PyTorch version:", torch.__version__)
+    print("MPS Available:", torch.backends.mps.is_available())
+    print("MPS Built:", torch.backends.mps.is_built())
+
+    # Check a tensor in mps
+    device = torch.device("mps")
+    x = torch.rand(3, 3).to(device)
+    print("Tensor is on:", x.device)
 
     # Create a tensor and perform a simple arithmetic operation
     x: torch.Tensor = torch.tensor([1.0, 2.0, 3.0])
