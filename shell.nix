@@ -39,6 +39,9 @@ pkgs.mkShell {
     # Pyright LSP server (from nodePackages)
     pkgs.pyright
 
+    # Monitor MPS performance from CLI
+    pkgs.macmon
+
     # Native dependencies (ensuring BLAS and other native libs are available)
     pkgs.openblas
     pkgs.libjpeg
@@ -55,12 +58,12 @@ pkgs.mkShell {
   shellHook = ''
     # Include the python environment's site-packages in PYTHONPATH
     export PYTHONPATH="${pythonEnv}/${pythonEnv.sitePackages}:$PYTHONPATH"
-    
+
     # Define a temporary directory for pip installations if needed
     export PIP_PREFIX="$(pwd)/_build/pip_packages"
     export PYTHONPATH="$PIP_PREFIX/${pkgs.python313.sitePackages}:$PYTHONPATH"
     export PATH="$PIP_PREFIX/bin:$PATH"
-    
+
     # Enable PyTorch experimental MPS fallback support on Apple Silicon
     export PYTORCH_ENABLE_MPS_FALLBACK=1
 
